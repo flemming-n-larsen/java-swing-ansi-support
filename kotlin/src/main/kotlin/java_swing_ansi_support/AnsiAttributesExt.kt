@@ -4,184 +4,150 @@ import javax.swing.text.MutableAttributeSet
 import javax.swing.text.SimpleAttributeSet
 import javax.swing.text.StyleConstants
 
+/**
+ * Extension functions to update a [MutableAttributeSet] instance using ANSI styles.
+ */
 object AnsiAttributesExt {
 
+    /**
+     * Updates the styling on a [MutableAttributeSet] based on ANSI Escape Code.
+     *
+     * @param escCode is the [AnsiEscCode] defining the style to set, e.g. [AnsiEscCode.BOLD].
+     * @param ansiColors is the [IAnsiColors] that defines the foreground and background colors to use for the styling.
+     */
     fun MutableAttributeSet.updateAnsi(escCode: AnsiEscCode, ansiColors: IAnsiColors): MutableAttributeSet {
 
         var attributes: MutableAttributeSet = SimpleAttributeSet(this)
 
         when (escCode) {
-            AnsiEscCode.RESET -> {
+            AnsiEscCode.RESET ->
                 attributes = SimpleAttributeSet()
-            }
 
-            AnsiEscCode.BOLD -> {
+            AnsiEscCode.BOLD ->
                 StyleConstants.setBold(attributes, true)
-            }
 
-            AnsiEscCode.FAINT -> {
+            AnsiEscCode.FAINT ->
                 StyleConstants.setBold(attributes, false)
-            }
 
-            AnsiEscCode.ITALIC -> {
+            AnsiEscCode.ITALIC ->
                 StyleConstants.setItalic(attributes, true)
-            }
 
-            AnsiEscCode.UNDERLINE -> {
+            AnsiEscCode.UNDERLINE ->
                 StyleConstants.setUnderline(attributes, true)
-            }
 
-            AnsiEscCode.NORMAL -> {
+            AnsiEscCode.NORMAL ->
                 StyleConstants.setBold(attributes, false)
-            }
 
-            AnsiEscCode.NOT_BOLD -> {
+            AnsiEscCode.NOT_BOLD ->
                 StyleConstants.setBold(attributes, false)
-            }
 
-            AnsiEscCode.NOT_ITALIC -> {
+            AnsiEscCode.NOT_ITALIC ->
                 StyleConstants.setItalic(attributes, false)
-            }
 
-            AnsiEscCode.NOT_UNDERLINED -> {
+            AnsiEscCode.NOT_UNDERLINED ->
                 StyleConstants.setUnderline(attributes, false)
-            }
 
-            AnsiEscCode.BLACK -> {
+            AnsiEscCode.BLACK ->
                 StyleConstants.setForeground(attributes, ansiColors.black)
-            }
 
-            AnsiEscCode.RED -> {
+            AnsiEscCode.RED ->
                 StyleConstants.setForeground(attributes, ansiColors.red)
-            }
 
-            AnsiEscCode.GREEN -> {
+            AnsiEscCode.GREEN ->
                 StyleConstants.setForeground(attributes, ansiColors.green)
-            }
 
-            AnsiEscCode.YELLOW -> {
+            AnsiEscCode.YELLOW ->
                 StyleConstants.setForeground(attributes, ansiColors.yellow)
-            }
 
-            AnsiEscCode.BLUE -> {
+            AnsiEscCode.BLUE ->
                 StyleConstants.setForeground(attributes, ansiColors.blue)
-            }
 
-            AnsiEscCode.MAGENTA -> {
+            AnsiEscCode.MAGENTA ->
                 StyleConstants.setForeground(attributes, ansiColors.magenta)
-            }
 
-            AnsiEscCode.CYAN -> {
+            AnsiEscCode.CYAN ->
                 StyleConstants.setForeground(attributes, ansiColors.cyan)
-            }
 
-            AnsiEscCode.WHITE -> {
+            AnsiEscCode.WHITE ->
                 StyleConstants.setForeground(attributes, ansiColors.white)
-            }
 
-            AnsiEscCode.BRIGHT_BLACK -> {
+            AnsiEscCode.BRIGHT_BLACK ->
                 StyleConstants.setForeground(attributes, ansiColors.brightBlack)
-            }
 
-            AnsiEscCode.BRIGHT_RED -> {
+            AnsiEscCode.BRIGHT_RED ->
                 StyleConstants.setForeground(attributes, ansiColors.brightRed)
-            }
 
-            AnsiEscCode.BRIGHT_GREEN -> {
+            AnsiEscCode.BRIGHT_GREEN ->
                 StyleConstants.setForeground(attributes, ansiColors.brightGreen)
-            }
 
-            AnsiEscCode.BRIGHT_YELLOW -> {
+            AnsiEscCode.BRIGHT_YELLOW ->
                 StyleConstants.setForeground(attributes, ansiColors.brightYellow)
-            }
 
-            AnsiEscCode.BRIGHT_BLUE -> {
+            AnsiEscCode.BRIGHT_BLUE ->
                 StyleConstants.setForeground(attributes, ansiColors.brightBlue)
-            }
 
-            AnsiEscCode.BRIGHT_MAGENTA -> {
+            AnsiEscCode.BRIGHT_MAGENTA ->
                 StyleConstants.setForeground(attributes, ansiColors.brightMagenta)
-            }
 
-            AnsiEscCode.BRIGHT_CYAN -> {
+            AnsiEscCode.BRIGHT_CYAN ->
                 StyleConstants.setForeground(attributes, ansiColors.brightCyan)
-            }
 
-            AnsiEscCode.BRIGHT_WHITE -> {
+            AnsiEscCode.BRIGHT_WHITE ->
                 StyleConstants.setForeground(attributes, ansiColors.brightWhite)
-            }
 
-            AnsiEscCode.DEFAULT -> {
+            AnsiEscCode.DEFAULT ->
                 StyleConstants.setForeground(attributes, ansiColors.default)
-            }
 
-            AnsiEscCode.BLACK_BACKGROUND -> {
+            AnsiEscCode.BLACK_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.black)
-            }
 
-            AnsiEscCode.RED_BACKGROUND -> {
+            AnsiEscCode.RED_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.red)
-            }
 
-            AnsiEscCode.GREEN_BACKGROUND -> {
+            AnsiEscCode.GREEN_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.green)
-            }
 
-            AnsiEscCode.YELLOW_BACKGROUND -> {
+            AnsiEscCode.YELLOW_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.yellow)
-            }
 
-            AnsiEscCode.BLUE_BACKGROUND -> {
+            AnsiEscCode.BLUE_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.blue)
-            }
 
-            AnsiEscCode.MAGENTA_BACKGROUND -> {
+            AnsiEscCode.MAGENTA_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.magenta)
-            }
 
-            AnsiEscCode.CYAN_BACKGROUND -> {
+            AnsiEscCode.CYAN_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.cyan)
-            }
 
-            AnsiEscCode.WHITE_BACKGROUND -> {
+            AnsiEscCode.WHITE_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.white)
-            }
 
-            AnsiEscCode.BRIGHT_BLACK_BACKGROUND -> {
+            AnsiEscCode.BRIGHT_BLACK_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.brightBlack)
-            }
 
-            AnsiEscCode.BRIGHT_RED_BACKGROUND -> {
+            AnsiEscCode.BRIGHT_RED_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.brightRed)
-            }
 
-            AnsiEscCode.BRIGHT_GREEN_BACKGROUND -> {
+            AnsiEscCode.BRIGHT_GREEN_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.brightGreen)
-            }
 
-            AnsiEscCode.BRIGHT_YELLOW_BACKGROUND -> {
+            AnsiEscCode.BRIGHT_YELLOW_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.brightYellow)
-            }
 
-            AnsiEscCode.BRIGHT_BLUE_BACKGROUND -> {
+            AnsiEscCode.BRIGHT_BLUE_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.brightBlue)
-            }
 
-            AnsiEscCode.BRIGHT_MAGENTA_BACKGROUND -> {
+            AnsiEscCode.BRIGHT_MAGENTA_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.brightMagenta)
-            }
 
-            AnsiEscCode.BRIGHT_CYAN_BACKGROUND -> {
+            AnsiEscCode.BRIGHT_CYAN_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.brightCyan)
-            }
 
-            AnsiEscCode.BRIGHT_WHITE_BACKGROUND -> {
+            AnsiEscCode.BRIGHT_WHITE_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.brightWhite)
-            }
 
-            AnsiEscCode.DEFAULT_BACKGROUND -> {
+            AnsiEscCode.DEFAULT_BACKGROUND ->
                 StyleConstants.setBackground(attributes, ansiColors.default)
-            }
         }
         return attributes
     }

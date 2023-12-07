@@ -10,7 +10,7 @@ import javax.swing.text.StyleConstants
 object AnsiAttributesExt {
 
     /**
-     * Updates the styling on a [MutableAttributeSet] based on ANSI Escape Code.
+     * Updates the styling on a [MutableAttributeSet] based on an ANSI Escape Code.
      *
      * @param escCode is the [AnsiEscCode] defining the style to set, e.g. [AnsiEscCode.BOLD].
      * @param ansiColors is the [IAnsiColors] that defines the foreground and background colors to use for the styling.

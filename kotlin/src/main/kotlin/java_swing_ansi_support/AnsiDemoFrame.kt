@@ -3,8 +3,12 @@ package java_swing_ansi_support
 import javax.swing.JFrame
 import javax.swing.JScrollPane
 
-object AnsiTestFrame : JFrame() {
-    private fun readResolve(): Any = AnsiTestFrame // to avoid warning
+/**
+ * The AnsiDemoFrame is used for demonstrate how to use the [AnsiEditorPane] that uses the [AnsiEditorKit], and the
+ * [AnsiTextBuilder].
+ */
+object AnsiDemoFrame : JFrame() {
+    private fun readResolve(): Any = AnsiDemoFrame // to avoid warning
 
     val editorPane = AnsiEditorPane().apply {
         isEditable = false
@@ -13,15 +17,16 @@ object AnsiTestFrame : JFrame() {
     init {
         setBounds(100, 100, 1000, 800)
 
-        val scrollPane = JScrollPane(editorPane)
-
-        contentPane.add(scrollPane)
+        contentPane.add(JScrollPane(editorPane))
     }
 }
 
 fun main() {
 
-    val ansi = AnsiTextBuilder()
+    val ansiTextBuilder = AnsiTextBuilder()
+        .space(3).text("<-- 3 spaces").newline()
+        .tab().text("<-- 1 tab").newline()
+
         .bold().text("bold").newline().bold(false)
         .faint().text("faint").newline().faint(false)
         .italic().text("italic").newline().italic(false)
@@ -70,8 +75,8 @@ fun main() {
         .defaultBg().text("default background color").newline()
 
 
-    AnsiTestFrame.apply {
-        editorPane.text = ansi.build()
+    AnsiDemoFrame.apply {
+        editorPane.text = ansiTextBuilder.build()
         isVisible = true
     }
 }

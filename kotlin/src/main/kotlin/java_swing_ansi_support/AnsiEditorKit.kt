@@ -5,6 +5,15 @@ import java.awt.Color
 import java.io.*
 import javax.swing.text.*
 
+/**
+ * The AnsiEditorKit is a specialized [StyledEditorKit] that is able to created [StyledDocument]s based on text
+ * containing ANSI escape codes for styling the text.
+ * The documents are created with the Monospaced font to simulate an old-fashioned text console for displaying ANSI
+ * graphics.
+ *
+ * @param fontSize is the monospaced font size to use across an entire document. Default is 14.
+ * @param ansiColors is the [IAnsiColors] to use for the ANSI Colors. Default is the [DefaultAnsiColors].
+ */
 class AnsiEditorKit(
     private val fontSize: Int = 14,
     private val ansiColors: IAnsiColors = DefaultAnsiColors
@@ -14,23 +23,34 @@ class AnsiEditorKit(
 
     override fun getContentType() = "text/x-ansi"
 
+    /** {@inheritDoc} */
     override fun read(inputStream: InputStream, doc: Document, pos: Int) {
         read(BufferedReader(InputStreamReader(inputStream)), doc, pos)
     }
 
+    /** {@inheritDoc} */
     override fun read(reader: Reader, doc: Document, pos: Int) {
         require(doc is StyledDocument) { "The document must be a StyledDocument for this kit" }
         insertAnsi(doc, reader.readText(), pos)
     }
 
+    /** {@inheritDoc} */
     override fun write(outputStream: OutputStream, doc: Document, pos: Int, len: Int) {
         write(BufferedWriter(OutputStreamWriter(outputStream)), doc, pos, len)
     }
 
+    /** {@inheritDoc} */
     override fun write(writer: Writer, doc: Document, pos: Int, len: Int) {
         writer.write(doc.getText(pos, len))
     }
 
+    /**
+     * Inserts an ANSI text into a specific text position of the document.
+     * ANSI escape codes are converted into [AttributeSet]s to style the inserted text.
+     *
+     * @param doc is a [StyledDocument] the ANSI text is inserted into.
+     * @param offset is the offset into the document where the text will be inserted.
+     */
     fun insertAnsi(doc: StyledDocument, ansiText: String, offset: Int = doc.length) {
         require(offset >= 0) { "Offset cannot be negative. Was: $offset" }
 
@@ -61,7 +81,7 @@ class AnsiEditorKit(
             codeStart = m.range.first
             val codeEnd = m.range.last + 1
 
-            attributes = attributes.updateAnsi(AnsiEscCode.fromCode(ansiCode), ansiColors)
+            attributes = attributes.updateAnsi(AnsiEscCode.fromEscCode(ansiCode), ansiColors)
 
             val endMatch = ansiEscCodeRegex.find(ansiText, codeEnd)
 

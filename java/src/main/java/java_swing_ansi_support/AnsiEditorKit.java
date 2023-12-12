@@ -139,19 +139,16 @@ public class AnsiEditorKit extends StyledEditorKit {
 
         while (matcher.find()) {
             codeStart = matcher.start();
-            var codeEnd = matcher.end() + 1;
+            var codeEnd = matcher.end();
             var ansiCode = ansiText.substring(codeStart, codeEnd);
 
             attributes = AnsiAttributesUtil.updateAnsi(attributes, AnsiEscCode.fromEscCode(ansiCode), ansiColors);
 
             var endMatcher = ansiEscCodePattern.matcher(ansiText);
-
-            endMatcher.find(codeEnd);
-
             if (endMatcher.find(codeEnd)) {
-                text = ansiText.substring(codeEnd);
-            } else {
                 text = ansiText.substring(codeEnd, endMatcher.start());
+            } else {
+                text = ansiText.substring(codeEnd);
             }
             if (!text.isBlank()) {
                 doc.insertString(doc.getLength(), text, attributes);

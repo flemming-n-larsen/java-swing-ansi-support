@@ -15,7 +15,7 @@ object AnsiDemoFrame : JFrame() {
     }
 
     init {
-        setBounds(100, 100, 1000, 800)
+        setBounds(100, 100, 400, 800)
         contentPane.add(JScrollPane(editorPane))
     }
 }

@@ -11,8 +11,9 @@ public class AnsiDemoFrame extends JFrame {
     JEditorPane editorPane = new AnsiEditorPane();
 
     private AnsiDemoFrame() {
-        editorPane.setEditable(false);
+        setBounds(100, 100, 400, 800);
 
+        editorPane.setEditable(false);
         getContentPane().add(new JScrollPane(editorPane));
     }
 

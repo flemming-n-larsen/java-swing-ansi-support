@@ -26,8 +26,10 @@ class AnsiTextBuilder {
     /**
      * Appends plain text to the ANSI string.
      * @return an instance of this builder used for chaining methods.
+     *
+     * @param plain a plain text string.
      */
-    fun text(plain: Any?): AnsiTextBuilder {
+    fun text(plain: String): AnsiTextBuilder {
         builder.append(plain)
         return this
     }
@@ -65,17 +67,17 @@ class AnsiTextBuilder {
 
     private fun repeat(fragment: Any, count: Int) {
         require(count >= 0) { "count must be >= 0" }
-        for (i in 1..count) {
-            builder.append(fragment)
-        }
+        builder.append(fragment.toString().repeat(count))
     }
 
     /**
      * Appends a [AnsiEscCode] to the ANSI string.
      * @return an instance of this builder used for chaining methods.
+     *
+     * @param escCode is the [AnsiEscCode] to append.
      */
-    fun esc(code: AnsiEscCode): AnsiTextBuilder {
-        builder.append(code)
+    fun esc(escCode: AnsiEscCode): AnsiTextBuilder {
+        builder.append(escCode)
         return this
     }
 
@@ -92,7 +94,7 @@ class AnsiTextBuilder {
      * Appends a [AnsiEscCode.BOLD] or [AnsiEscCode.NOT_BOLD] to the ANSI string.
      * @return an instance of this builder used for chaining methods.
      *
-     * @param `true` to append [AnsiEscCode.BOLD]; `false` to append [AnsiEscCode.NOT_BOLD]. Default is `true`.
+     * @param enabled `true` to append [AnsiEscCode.BOLD]; `false` to append [AnsiEscCode.NOT_BOLD]. Default is `true`.
      */
     fun bold(enabled: Boolean = true): AnsiTextBuilder {
         builder.append(if (enabled) AnsiEscCode.BOLD else AnsiEscCode.NOT_BOLD)
@@ -103,7 +105,7 @@ class AnsiTextBuilder {
      * Appends a [AnsiEscCode.FAINT] or [AnsiEscCode.NORMAL] to the ANSI string.
      * @return an instance of this builder used for chaining methods.
      *
-     * @param `true` to append [AnsiEscCode.FAINT]; `false` to append [AnsiEscCode.NORMAL]. Default is `true`.
+     * @param enabled `true` to append [AnsiEscCode.FAINT]; `false` to append [AnsiEscCode.NORMAL]. Default is `true`.
      */
     fun faint(enabled: Boolean = true): AnsiTextBuilder {
         builder.append(if (enabled) AnsiEscCode.FAINT else AnsiEscCode.NORMAL)
@@ -114,7 +116,7 @@ class AnsiTextBuilder {
      * Appends a [AnsiEscCode.ITALIC] or [AnsiEscCode.NOT_ITALIC] to the ANSI string.
      * @return an instance of this builder used for chaining methods.
      *
-     * @param `true` to append [AnsiEscCode.ITALIC]; `false` to append [AnsiEscCode.NOT_ITALIC]. Default is `true`.
+     * @param enabled `true` to append [AnsiEscCode.ITALIC]; `false` to append [AnsiEscCode.NOT_ITALIC]. Default is `true`.
      */
     fun italic(enabled: Boolean = true): AnsiTextBuilder {
         builder.append(if (enabled) AnsiEscCode.ITALIC else AnsiEscCode.NOT_ITALIC)
@@ -122,13 +124,13 @@ class AnsiTextBuilder {
     }
 
     /**
-     * Appends a [AnsiEscCode.UNDERLINE] or [AnsiEscCode.UNDERLINE] to the ANSI string.
+     * Appends a [AnsiEscCode.UNDERLINE] or [AnsiEscCode.NOT_UNDERLINED] to the ANSI string.
      * @return an instance of this builder used for chaining methods.
      *
-     * @param `true` to append [AnsiEscCode.UNDERLINE]; `false` to append [AnsiEscCode.UNDERLINE]. Default is `true`.
+     * @param enabled `true` to append [AnsiEscCode.UNDERLINE]; `false` to append [AnsiEscCode.NOT_UNDERLINED]. Default is `true`.
      */
     fun underline(enabled: Boolean = true): AnsiTextBuilder {
-        builder.append(if (enabled) AnsiEscCode.UNDERLINE else AnsiEscCode.UNDERLINE)
+        builder.append(if (enabled) AnsiEscCode.UNDERLINE else AnsiEscCode.NOT_UNDERLINED)
         return this
     }
 
@@ -217,7 +219,7 @@ class AnsiTextBuilder {
      * Appends a [AnsiEscCode.DEFAULT] to the ANSI string.
      * @return an instance of this builder used for chaining methods.
      */
-    fun default(): AnsiTextBuilder {
+    fun defaultColor(): AnsiTextBuilder {
         builder.append(AnsiEscCode.DEFAULT)
         return this
     }

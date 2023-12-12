@@ -16,13 +16,11 @@ object AnsiDemoFrame : JFrame() {
 
     init {
         setBounds(100, 100, 1000, 800)
-
         contentPane.add(JScrollPane(editorPane))
     }
 }
 
 fun main() {
-
     val ansiTextBuilder = AnsiTextBuilder()
         .space(3).text("<-- 3 spaces").newline()
         .tab().text("<-- 1 tab").newline()
@@ -51,7 +49,7 @@ fun main() {
         .brightCyan().text("bright cyan foreground").newline()
         .brightWhite().text("bright white foreground").newline()
 
-        .default().text("default foreground color").newline()
+        .defaultColor().text("default foreground color").newline()
 
         .blackBg().text("black background").newline()
         .redBg().text("red background").newline()
@@ -73,7 +71,6 @@ fun main() {
         .brightWhiteBg().text("bright white background").newline()
 
         .defaultBg().text("default background color").newline()
-
 
     AnsiDemoFrame.apply {
         editorPane.text = ansiTextBuilder.build()

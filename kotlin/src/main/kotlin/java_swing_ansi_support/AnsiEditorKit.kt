@@ -49,6 +49,7 @@ class AnsiEditorKit(
      * ANSI escape codes are converted into [AttributeSet]s to style the inserted text.
      *
      * @param doc is a [StyledDocument] the ANSI text is inserted into.
+     * @param ansiText is the ANSI text to insert into the document.
      * @param offset is the offset into the document where the text will be inserted.
      */
     fun insertAnsi(doc: StyledDocument, ansiText: String, offset: Int = doc.length) {

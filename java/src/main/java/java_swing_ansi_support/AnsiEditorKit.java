@@ -130,16 +130,15 @@ public class AnsiEditorKit extends StyledEditorKit {
             return;
         }
 
-        var codeStart = matcher.start();
-
-        var text = ansiText.substring(0, codeStart);
+        var text = ansiText.substring(0, matcher.start());
         if (!text.isBlank()) {
             doc.insertString(0, text, attributes); // no ansi codes found
         }
 
-        while (matcher.find()) {
-            codeStart = matcher.start();
-            var codeEnd = matcher.end();
+        int codeEnd;
+        do {
+            int codeStart = matcher.start();
+            codeEnd = matcher.end();
             var ansiCode = ansiText.substring(codeStart, codeEnd);
 
             attributes = AnsiAttributesUtil.updateAnsi(attributes, AnsiEscCode.fromEscCode(ansiCode), ansiColors);
@@ -154,6 +153,7 @@ public class AnsiEditorKit extends StyledEditorKit {
                 doc.insertString(doc.getLength(), text, attributes);
             }
         }
+        while (matcher.find(codeEnd));
     }
 
     private static String readText(Reader reader) throws IOException {

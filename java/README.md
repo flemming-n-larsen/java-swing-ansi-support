@@ -1,6 +1,6 @@
 # ANSI Support in Java Swing with Java classes
 
-Note that you can also find Kotlin classes as a supplement to the Java classes [here](../java/README.md).
+Note that you can also find Kotlin classes as a supplement to the Java classes [here](../kotlin/README.md).
 
 ## Provided classes
 
